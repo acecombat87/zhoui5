@@ -70,10 +70,13 @@
         }
       },
       "": {
-        "dataSource": "mainService",
-        "preload": true,
-        "settings": {}
-      }
+          "type": "sap.ui.model.json.JSONModel",
+          "uri": "data/customers.json"
+      },
+      "genderModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "data/genders.json"
+      } 
     },
     "resources": {
       "css": [
