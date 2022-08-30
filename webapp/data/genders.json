@@ -1,17 +1,5 @@
 {
     "genders": [
-        {
-            "short": "f",
-            "long": "female"
-        },
-
-        {
-            "short": "m",
-            "long": "male"
-        },
-        {
-            "short": "d",
-            "long": "divers"
-        }
+        "female", "male", "divers"
     ]
 }

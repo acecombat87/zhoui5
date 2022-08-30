@@ -42,7 +42,7 @@
                 <Label id="app_label_gender" text="{i18n>app.gender}" labelFor="app_input_gender"/> 
                 <Select id="app_select_gender" items="{gendersModel>/genders}">
                     <items>
-                        <core:Item id="_IDGenItem1" key="{gendersModel>short}" text="{gendersModel>long}"/>
+                        <core:Item id="_IDGenItem1" key="{gendersModel>}" text="{= ${gendersModel>}==='female' ?${i18n>female} : ${i18n>male}}"/>
                     </items>
                 </Select>
 
