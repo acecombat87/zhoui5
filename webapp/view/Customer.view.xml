@@ -7,6 +7,7 @@
     
     <Page id="page" title="{i18n>title}">
         <content>
+
         <f:SimpleForm id="SimpleFormChange354"
 			editable="true"
 			layout="ResponsiveGridLayout"
@@ -25,40 +26,38 @@
 			columnsM="1"
 			singleContainerFullSize="false" >
 			<f:content>
-
-                
-				<Label id="app_label_customerid" text="{i18n>app.customerid}" labelFor="app_input_customerid"/> 
-                <Input id="app_input_customerid" value="1000001"/>
+              
+            	<Label id="app_label_customerid" text="{i18n>app.customerid}" labelFor="app_input_customerid"/> 
+                <Input id="app_input_customerid" value="{/customerid}"/>
 
                 <Label id="app_label_firstname" text="{i18n>app.firstname}" labelFor="app_input_firstname"/> 
-                <Input id="app_input_firstname" value="Max"/>
+                <Input id="app_input_firstname" value="{/firstname}"/>
 
                 <Label id="app_label_lastname" text="{i18n>app.lastname}" labelFor="app_input_lastname"/> 
-                <Input id="app_input_lastname" value="Mustermann"/>
+                <Input id="app_input_lastname" value="{/lastname}"/>
 
                 <Label id="app_label_title" text="{i18n>app.title}" labelFor="app_input_title"/> 
-                <Input id="app_input_title" value="Dr."/>
+                <Input id="app_input_title" value="{/title}"/>
 
                 <Label id="app_label_gender" text="{i18n>app.gender}" labelFor="app_input_gender"/> 
-                <Select id="app_select_gender">
+                <Select id="app_select_gender" items="{gendersModel>/genders}">
                     <items>
-                        <core:Item id="_IDGenItem1" key="w" text="weiblich" />
-                        <core:Item id="_IDGenItem2" key="m" text="männlich" />
-                        <core:Item id="_IDGenItem3" key="n" text="genderneutral" />
+                        <core:Item id="_IDGenItem1" key="{gendersModel>short}" text="{gendersModel>long}"/>
                     </items>
                 </Select>
 
                 <Label id="app_label_email" text="{i18n>app.email}" labelFor="app_input_email"/> 
-                <Input id="app_input_email" value="max.mustermann@clouddna.at"/>
+                <Input id="app_input_email" value="{/email}"/>
 
                 <Label id="app_label_phone" text="{i18n>app.phone}" labelFor="app_input_phone"/> 
-                <Input id="app_input_phone" value="0821/373731"/>
+                <Input id="app_input_phone" value="{/phone}"/>
 
                 <Label id="app_label_website" text="{i18n>app.website}" labelFor="app_input_website"/> 
-                <Input id="app_input_website" value="www.clouddna.at"/>
+                <Input id="app_input_website" value="{/website}"/>
 
 			</f:content>
 		</f:SimpleForm>
+
 </content>
     </Page>
 </mvc:View>

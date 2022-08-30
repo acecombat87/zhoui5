@@ -73,7 +73,7 @@
           "type": "sap.ui.model.json.JSONModel",
           "uri": "data/customers.json"
       },
-      "genderModel": {
+      "gendersModel": {
         "type": "sap.ui.model.json.JSONModel",
         "uri": "data/genders.json"
       } 
