@@ -6,58 +6,30 @@
     >
     
     <Page id="page" title="{i18n>title}">
+
+<customHeader>
+    <OverflowToolbar id="_IDGenOverflowToolbar1">
+        <Button id="customer_back_button" type="Back"
+        press="onNavBack" visible="{= !${editModel>/editmode}}"/>
+        <Title id="_IDGenTitle1" text="{i18n>title}"/>
+        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+        <Button id="app_edit_button" text="{i18n>edit}" type="Emphasized"
+        icon="sap-icon://edit" press="onEditPressed" visible="{= !${editModel>/editmode}}"/>
+    </OverflowToolbar>
+</customHeader>
+
         <content>
 
-        <f:SimpleForm id="SimpleFormChange354"
-			editable="true"
-			layout="ResponsiveGridLayout"
-			title="Address"
-			labelSpanXL="3"
-			labelSpanL="3"
-			labelSpanM="3"
-			labelSpanS="12"
-			adjustLabelSpan="false"
-			emptySpanXL="4"
-			emptySpanL="4"
-			emptySpanM="4"
-			emptySpanS="0"
-			columnsXL="1"
-			columnsL="1"
-			columnsM="1"
-			singleContainerFullSize="false" >
-			<f:content>
-              
-            	<Label id="app_label_customerid" text="{i18n>app.customerid}" labelFor="app_input_customerid"/> 
-                <Input id="app_input_customerid" value="{/customerid}"/>
+        </content>
 
-                <Label id="app_label_firstname" text="{i18n>app.firstname}" labelFor="app_input_firstname"/> 
-                <Input id="app_input_firstname" value="{/firstname}"/>
+        <footer>
+            <Bar id="_IDGenBar1">
+                <contentRight>
+                    <Button id="app_save_button" text="{i18n>save}" type="Accept" icon="sap-icon://save" press="onSavePressed" visible="{= ${editModel>/editmode}}"/>
+                    <Button id="app_cancel_button" text="{i18n>cancel}" type="Reject" icon="sap-icon://cancel" press="onCancelPressed" visible="{= ${editModel>/editmode}}"/>
+                </contentRight>
+            </Bar>
+        </footer>
 
-                <Label id="app_label_lastname" text="{i18n>app.lastname}" labelFor="app_input_lastname"/> 
-                <Input id="app_input_lastname" value="{/lastname}"/>
-
-                <Label id="app_label_title" text="{i18n>app.title}" labelFor="app_input_title"/> 
-                <Input id="app_input_title" value="{/title}"/>
-
-                <Label id="app_label_gender" text="{i18n>app.gender}" labelFor="app_input_gender"/> 
-                <Select id="app_select_gender" items="{gendersModel>/genders}">
-                    <items>
-                        <core:Item id="_IDGenItem1" key="{gendersModel>}" text="{= ${gendersModel>}==='female' ?${i18n>female} : ${i18n>male}}"/>
-                    </items>
-                </Select>
-
-                <Label id="app_label_email" text="{i18n>app.email}" labelFor="app_input_email"/> 
-                <Input id="app_input_email" value="{/email}"/>
-
-                <Label id="app_label_phone" text="{i18n>app.phone}" labelFor="app_input_phone"/> 
-                <Input id="app_input_phone" value="{/phone}"/>
-
-                <Label id="app_label_website" text="{i18n>app.website}" labelFor="app_input_website"/> 
-                <Input id="app_input_website" value="{/website}"/>
-
-			</f:content>
-		</f:SimpleForm>
-
-</content>
     </Page>
 </mvc:View>

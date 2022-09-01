@@ -16,13 +16,13 @@
       "toolsId": "d319c5bc-cb4a-46bb-8bcd-048348e39351"
     },
     "dataSources": {
-      "mainService": {
-        "uri": "/sap/opu/odata/",
+      
+      "ZHOUI5_CUSTOMER_SRV": {
+        "uri": "/sap/opu/odata/sap/ZHOUI5_CUSTOMER_SRV/",
         "type": "OData",
         "settings": {
-          "annotations": [],
-          "localUri": "localService/metadata.xml",
-          "odataVersion": "2.0"
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
         }
       }
     }
@@ -70,13 +70,20 @@
         }
       },
       "": {
-          "type": "sap.ui.model.json.JSONModel",
-          "uri": "data/customers.json"
+        "dataSource": "ZHOUI5_CUSTOMER_SRV",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": true,
+          "useBatch": true,
+          "tokenHandling": true
+        }
       },
       "gendersModel": {
         "type": "sap.ui.model.json.JSONModel",
         "uri": "data/genders.json"
-      } 
+      }
     },
     "resources": {
       "css": [
@@ -98,11 +105,32 @@
       "routes": [
         {
           "name": "RouteCustomer",
-          "pattern": ":?query:",
+          "pattern": "customer",
           "target": [
             "TargetCustomer"
           ]
-        }
+        },
+        {
+            "name": "Customer",
+            "pattern": "customer/{path}",
+            "target": [
+                "TargetCustomer"
+            ]
+        },
+        {
+          "name": "Main",
+          "pattern": "",
+          "target": [
+            "Main"
+          ]
+        },
+        {
+            "name": "CreateCustomer",
+            "pattern": "createcustomer",
+            "target": [
+              "TargetCustomer"
+            ]
+          }
       ],
       "targets": {
         "TargetCustomer": {
@@ -111,6 +139,13 @@
           "clearControlAggregation": false,
           "viewId": "Customer",
           "viewName": "Customer"
+        },
+        "Main": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Main",
+          "viewName": "Main"
         }
       }
     },

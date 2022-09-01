@@ -17,7 +17,7 @@ server:
           url: https://ui5.sap.com
         backend:
           - path: /sap
-            url: http://localhost
+            destination: CloudDNA_WDF_FSD
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
