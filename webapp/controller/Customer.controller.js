@@ -1,17 +1,18 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "at/clouddna/training01/zhoui5/controller/BaseController",
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
-    "sap/ui/core/routing/History"
+    "sap/ui/core/routing/History",
+    
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,MessageBox,JSONModel, Fragment, History) {
+    function (BaseController, MessageBox,JSONModel, Fragment, History) {
         "use strict";
 
-        return Controller.extend("at.clouddna.training01.zhoui5.controller.Customer", {
+        return BaseController.extend("at.clouddna.training01.zhoui5.controller.Customer", {
             onInit: function () {
 
             },
@@ -25,15 +26,16 @@ sap.ui.define([
                 });
             
                 this.getView().setModel(oEditModel, "editModel");
-                //this._showCustomerFragment("DisplayCustomer");
 
-                let oRouter = this.getOwnerComponent().getRouter();
-                oRouter.getRoute("Customer").attachPatternMatched(this._onPatternMatched, this)
+                this.getRouter().getRoute("Customer").attachPatternMatched(this._onPatternMatched, this)
 
-                oRouter.getRoute("CreateCustomer").attachPatternMatched(this._onCreatePatternMatched, this);
+                this.getRouter().getRoute("CreateCustomer").attachPatternMatched(this._onCreatePatternMatched, this);
             },
 
             _onPatternMatched: function (oEvent) {
+                //wir wissen, dass der Kunde ausgewählt wurde und angezeigt werden soll
+                //1. EditMode auf False setzen
+                //2. das richtige Fragment laden (Anzeigeformular) 
                 this.bCreate = false;
                 
                 let sPath = oEvent.getParameters().arguments.path;
@@ -45,11 +47,16 @@ sap.ui.define([
             },
 
             _onCreatePatternMatched: function (oEvent) {
+                //wir wissen dass create aufgerufen wird
+                //1. EditMode auf True gesetzt
+                //2. das richtige Fragment laden (Eingabeformular) 
                 this.bCreate = true;
-            
+                
+                //lokal eine Kunden erstellen, der nicht im Backend existiert 
                 let oNewCustomerContext = this.getView().getModel().createEntry("/CustomerSet");
+                //Lokale Kopie vom Kunden auf die View binden
                 this.getView().bindElement(oNewCustomerContext.getPath());
-            
+                             
                 this.getView().getModel("editModel").setProperty("/editmode", true);
                 this._showCustomerFragment("ChangeCustomer");
             },
@@ -69,17 +76,23 @@ sap.ui.define([
             _showCustomerFragment: function(sFragmentName){
                 let oPage = this.getView().byId("page");
             
+                //1. Leeren wir den aktuellen Content
                 oPage.removeAllContent();
             
+                //2. Überprüfen wir, ob das Fragment schon einmal geladen wurde
                 if(this._fragmentList[sFragmentName]){
+                    //4. Fragment der Page einfügen
                     oPage.insertContent(this._fragmentList[sFragmentName]);
                 }else{
+                    //3. das Fragment laden
                     Fragment.load({
                         id: this.getView().createId(sFragmentName),
                         name: "at.clouddna.training01.zhoui5.view.fragment." + sFragmentName,
                         controller: this
                     }).then(function(oFragment){
+                        //4. Fragment für später abspeichern (in die Klassenvariable _fragmentList)
                         this._fragmentList[sFragmentName] = oFragment;
+                        //5. Fragment in die Page einfügen
                         oPage.insertContent(this._fragmentList[sFragmentName]);
                     }.bind(this));
                 }
